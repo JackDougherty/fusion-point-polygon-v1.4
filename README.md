@@ -10,4 +10,4 @@ ReferenceError: MapsLib is not defined  index.html:173:15
  ```
 
 ## compare with old demo
-- http://github.com/jackdougherty/fusion-point-polygon/index.html
+- http://github.com/jackdougherty/fusion-point-polygon/
