@@ -62,11 +62,12 @@
     });
     self.searchrecords = null;
 
-    // FIX (this or self in both?)-- EDIT to define background of polygon1 layer
-    this.polygon1 = new google.maps.FusionTablesLayer({
+    // FIX suggested by Ynyr Berry
+    self.polygon1 = new google.maps.FusionTablesLayer({
+      suppressInfoWindows: true,
       query: {
-        from:   this.polygon1TableID,
-        select: "geometry"
+        from: self.polygonFTID,
+        select: self.polygonlocation
       },
       styleId: 2,
       templateId: 2
@@ -97,10 +98,20 @@
 
   //-----custom functions-----
 
-  // FIX (this or self or MapsLib?)-- EDIT to show polygon layer if checkbox is selected; add more if other polygons
-    if ($("#rbPolygon1").is(':checked')) {
-      this.polygon1.setMap(map);
-    }
+  // FIX suggested by Ynyr Berry
+  if ($("#rbPolygon1").is(':checked')) {
+    self.polygon1.setMap(self.map);
+  } else if ($("#rbPolygon2").is(':checked')) {
+    self.polygon2.setMap(self.map);
+  } else if ($("#rbPolygon3").is(':checked')) {
+    self.polygon1.setMap(self.map),
+    self.polygon2.setMap(self.map);
+  }
+  
+  if (self.polygon1 !== null)
+    self.polygon1.setMap(null);
+  if (self.polygon2 !== null)
+    self.polygon2.setMap(null);
 
   //-----end of custom functions-----
 
