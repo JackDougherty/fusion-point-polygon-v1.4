@@ -12,7 +12,7 @@
     this.fusionTableId = options.fusionTableId || "",
 
     // EDIT to add more if you have additional polygon layers
-    this.polygon1 = options.polygon1TableId || "",
+    this.polygonFTID = options.polygon1TableId || "",
 
     // Found at https://console.developers.google.com/
     // Important! this key is for demonstration purposes. please register your own.
@@ -67,7 +67,7 @@
       suppressInfoWindows: true,
       query: {
         from: self.polygonFTID,
-        select: self.polygonlocation
+        select: self.locationColumn
       },
       styleId: 2,
       templateId: 2
@@ -97,22 +97,6 @@
   };
 
   //-----custom functions-----
-
-  // FIX suggested by Ynyr Berry
-  if ($("#rbPolygon1").is(':checked')) {
-    self.polygon1.setMap(self.map);
-  } else if ($("#rbPolygon2").is(':checked')) {
-    self.polygon2.setMap(self.map);
-  } else if ($("#rbPolygon3").is(':checked')) {
-    self.polygon1.setMap(self.map),
-    self.polygon2.setMap(self.map);
-  }
-  
-  if (self.polygon1 !== null)
-    self.polygon1.setMap(null);
-  if (self.polygon2 !== null)
-    self.polygon2.setMap(null);
-
   //-----end of custom functions-----
 
   MapsLib.prototype.submitSearch = function (whereClause, map) {
