@@ -12,7 +12,9 @@
     this.fusionTableId = options.fusionTableId || "",
 
     // EDIT to add more if you have additional polygon layers
-    this.polygon1 = options.polygon1TableId || "",
+    this.polygon1TableId = options.polygon1TableId || "",
+    // To add a second polygon layer
+    this.polygon2TableId = options.polygon2TableId || "",
 
     // Found at https://console.developers.google.com/
     // Important! this key is for demonstration purposes. please register your own.
@@ -21,7 +23,7 @@
     // name of the location column in your Fusion Table.
     // NOTE: if your location column name has spaces in it, surround it with single quotes
     // example: locationColumn:     "'my location'",
-    this.locationColumn = options.locationColumn || "geometry";
+    this.locationColumn = options.locationColumn || "";
 
     // appends to all address searches if not present
     this.locationScope = options.locationScope || "";
@@ -62,24 +64,36 @@
     });
     self.searchrecords = null;
 
-    // FIX (this or self in both?)-- EDIT to define background of polygon1 layer
-    this.polygon1 = new google.maps.FusionTablesLayer({
+    // EDIT to define background of polygon layers
+    self.polygon1 = new google.maps.FusionTablesLayer({
       query: {
-        from:   this.polygon1TableID,
+        from:   self.polygon1TableId,
         select: "geometry"
       },
-      styleId: 2,
-      templateId: 2
+        styleId: 2,
+        templateId: 2
+    });
+
+    self.polygon2 = new google.maps.FusionTablesLayer({
+        query: {
+          from:   self.polygon2TableId,
+          select: "geometry"
+        },
+        styleId: 2,
+        templateId: 2
     });
 
     //reset filters
     $("#search_address").val(self.convertToPlainString($.address.parameter('address')));
     var loadRadius = self.convertToPlainString($.address.parameter('radius'));
     if (loadRadius != "")
-    $("#search_radius").val(loadRadius);
+      $("#search_radius").val(loadRadius);
     else
-    $("#search_radius").val(self.searchRadius);
+      $("#search_radius").val(self.searchRadius);
 
+    // disable checkboxes
+    //$(":checkbox").prop("disabled", false);
+    // enable checkboxes
     $(":checkbox").prop("checked", "checked");
     $("#result_box").hide();
 
@@ -97,10 +111,6 @@
 
   //-----custom functions-----
 
-  // FIX (this or self or MapsLib?)-- EDIT to show polygon layer if checkbox is selected; add more if other polygons
-    if ($("#rbPolygon1").is(':checked')) {
-      this.polygon1.setMap(map);
-    }
 
   //-----end of custom functions-----
 
@@ -208,6 +218,14 @@
     // if ( $("#cbType5").is(':checked')) tempWhereClause.push('Other');
     // self.whereClause += " AND " + type_column + " IN ('" + tempWhereClause.join("','") + "')";
 
+    // EDIT to show polygon layer if checkbox is selected; add more if other polygons
+    if ($("#rbPolygon1").is(':checked')) {
+      self.polygon1.setMap(self.map);
+    }
+    // use if adding another polygon layer
+    else if ($("#rbPolygon2").is(':checked')) {
+      self.polygon2.setMap(self.map);
+    }
     //-----end of custom filters-----
 
     self.getgeoCondition(address, function (geoCondition) {
@@ -372,13 +390,15 @@
   MapsLib.prototype.clearSearch = function () {
     var self = this;
     if (self.searchrecords && self.searchrecords.getMap)
-    self.searchrecords.setMap(null);
-    if (self.polygon1 != null)
-    self.polygon1.setMap(null);
+        self.searchrecords.setMap(null);
     if (self.addrMarker && self.addrMarker.getMap)
-    self.addrMarker.setMap(null);
+        self.addrMarker.setMap(null);
+    if (self.polygon1 && self.polygon1.getMap)
+        self.polygon1.setMap(null);
+    //if (self.polygon2 && self.polygon2.getMap)
+    //    self.polygon2.setMap(null);
     if (self.searchRadiusCircle && self.searchRadiusCircle.getMap)
-    self.searchRadiusCircle.setMap(null);
+        self.searchRadiusCircle.setMap(null);
   };
 
   MapsLib.prototype.findMe = function () {

@@ -113,6 +113,13 @@
                   Hartford neighborhoods
                 </label>
               </li>
+              <!-- For Second Polygon Layer -->
+              <li>
+                <label class='radio inline'>
+                  <input type='radio' name='types' id='rbPolygon2' />
+                  Hartford School Zones
+                </label>
+              </li>
               <li>
                 <label class='radio inline'>
                   <input type='radio' name='types' id='rbPolygon0' />
@@ -132,6 +139,7 @@
           </div>
           <div class='alert alert-info' id='result_box' ><strong id='result_count'></strong></div>
         </div>
+
         <div class='col-md-8'>
           <noscript>
             <div class='alert alert-info'>
@@ -173,6 +181,7 @@
           var myMap = new MapsLib({
             fusionTableId:      "1FMjVRb16OqlkeodL7onaQ5A7jamtpSY0TmHaa-WQ",
             polygon1TableId:    "1isMlqPTETZovbtJXMwI9oTu0qVPSVK_1U6tg2eA_",
+            polygon2TableId:    "1WxDbHWNixQEK8VyTTKAiOsEcAaFlBoy9PdTD5EE",
             googleApiKey:       "AIzaSyDIevSvpV-ONb4Pf15VUtwyr_zZa7ccwq4",
             locationColumn:     "Address",
             map_center:         [41.76, -72.69],
