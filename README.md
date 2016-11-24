@@ -10,3 +10,6 @@ updated fusion-point-polygon to work with Derek Eder's template v1.4
 ## credits
 - @derekeder created the basic template
 - @danagerous adapted the older fusion-point-polygon for template v1.4
+
+## to do
+- index_iframe.html version needs work
