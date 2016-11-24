@@ -395,8 +395,8 @@
         self.addrMarker.setMap(null);
     if (self.polygon1 && self.polygon1.getMap)
         self.polygon1.setMap(null);
-    //if (self.polygon2 && self.polygon2.getMap)
-    //    self.polygon2.setMap(null);
+    if (self.polygon2 && self.polygon2.getMap)
+        self.polygon2.setMap(null);
     if (self.searchRadiusCircle && self.searchRadiusCircle.getMap)
         self.searchRadiusCircle.setMap(null);
   };
