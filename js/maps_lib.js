@@ -14,7 +14,7 @@
     // EDIT to add more if you have additional polygon layers
     this.polygon1TableId = options.polygon1TableId || "",
     // To add a second polygon layer
-    //this.polygon2TableId = options.polygon2TableId || "",
+    this.polygon2TableId = options.polygon2TableId || "",
 
     // Found at https://console.developers.google.com/
     // Important! this key is for demonstration purposes. please register your own.
@@ -64,7 +64,7 @@
     });
     self.searchrecords = null;
 
-    // FIX (this or self in both?)-- EDIT to define background of polygon1 layer
+    // EDIT to define background of polygon layers
     self.polygon1 = new google.maps.FusionTablesLayer({
       query: {
         from:   self.polygon1TableId,
@@ -74,14 +74,14 @@
         templateId: 2
     });
 
-    /*self.polygon2 = new google.maps.FusionTablesLayer({
+    self.polygon2 = new google.maps.FusionTablesLayer({
         query: {
           from:   self.polygon2TableId,
           select: "geometry"
         },
         styleId: 2,
         templateId: 2
-    });*/
+    });
 
     //reset filters
     $("#search_address").val(self.convertToPlainString($.address.parameter('address')));
@@ -218,14 +218,14 @@
     // if ( $("#cbType5").is(':checked')) tempWhereClause.push('Other');
     // self.whereClause += " AND " + type_column + " IN ('" + tempWhereClause.join("','") + "')";
 
-    // FIX (this or self or MapsLib?)-- EDIT to show polygon layer if checkbox is selected; add more if other polygons
+    // EDIT to show polygon layer if checkbox is selected; add more if other polygons
     if ($("#rbPolygon1").is(':checked')) {
       self.polygon1.setMap(self.map);
     }
     // use if adding another polygon layer
-    /*else if ($("#rbPolygon2").is(':checked')) {
+    else if ($("#rbPolygon2").is(':checked')) {
       self.polygon2.setMap(self.map);
-    }*/
+    }
     //-----end of custom filters-----
 
     self.getgeoCondition(address, function (geoCondition) {
