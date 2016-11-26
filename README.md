@@ -8,8 +8,8 @@ updated fusion-point-polygon to work with Derek Eder's template v1.4
 - http://github.com/jackdougherty/fusion-point-polygon/
 
 ## credits
-- @derekeder created the basic template
-- @danagerous adapted the older fusion-point-polygon for template v1.4
+- [@derekeder](https://github.com/derekeder) created the original template
+- [@danagerous](https://github.com/danagerous) adapted the older fusion-point-polygon for Derek's template v1.4
 
 ## to do
-- index_iframe.html version needs work
+- index_iframe.html still needs work
